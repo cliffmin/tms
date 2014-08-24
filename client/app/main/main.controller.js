@@ -11,7 +11,9 @@ angular.module('tmsApp')
                         ortDays: data['ortDays'],
                         ortLocalTimes: data['ortLocalTimes'],
                         aquaxTimes: data['aquaxTimes'],
-                        weekActivities: data['weekActivities']
+                        weekActivities: data['weekActivities'],
+                        instrumentOrtActivities: data['instrumentOrtActivities'],
+                        ortWeek: data['ortWeek']
                     },
                     adjustments: function(item) {
                         var size = Math.min(18, item.size);
@@ -30,8 +32,6 @@ angular.module('tmsApp')
                             from: 'ortDays',
                             layers: [{
                                 type: 'rect',
-                                color: 'blue',
-                                shape: 'diamond',
                                 mappings: function(d) {
                                     return {
                                         x: utc(d.start),
@@ -148,7 +148,7 @@ angular.module('tmsApp')
                                         size: Math.min(12, d.size * 0.3)
                                     };
                                 }
-                            },{
+                            }, {
                                 type: 'label',
                                 anchor: 'right',
                                 mappings: function(d) {
@@ -163,7 +163,7 @@ angular.module('tmsApp')
                                         size: Math.min(12, d.size * 0.3)
                                     };
                                 }
-                            },{
+                            }, {
                                 type: 'label',
                                 anchor: 'left',
                                 mappings: function(d) {
@@ -178,11 +178,68 @@ angular.module('tmsApp')
                                         size: Math.min(12, d.size * 0.3)
                                     };
                                 }
+                            }]
+                        }, {
+                            title: 'Instrument ORT Activities',
+                            from: 'instrumentOrtActivities',
+                            layers: [{
+                                type: 'rect',
+                                mappings: function(d) {
+                                    return {
+                                        x: utc(d.start),
+                                        x2: utc(d.end),
+                                    }
+                                }
+                            },{
+                                type: 'label',
+                                mappings: function(d){
+                                    return {
+                                                       x: utc(d.start),
+                                        x2: utc(d.end),
+                                        text: d.text
+                                    }
+                                }
                             }
 
 
-
                             ]
+                        },{
+                            title: 'Science ORT Week 26 auto',
+                            from: 'ortWeek',
+                            layers: [{
+                                type: 'rect',
+                                mappings: function(d) {
+                                    return {
+                                        x: utc(d.start),
+                                        x2: utc(d.end)
+                                    }
+                                }
+                            }, {
+                                type: 'label',
+                                mappings: function(d) {
+                                    return {
+                                        x: utc(d.start),
+                                        x2: utc(d.end),
+                                        text: d.text,
+                                    }
+                                },
+                            }, {
+                                type: 'label',
+                                fill: 'none',
+                                anchor: 'left',
+                                mappings: function(d) {
+                                    return {
+                                        text: d.start,
+                                        x: utc(d.start),
+                                    };
+                                },
+                                adjustments: function(d) {
+                                    return {
+                                        // Slightly shrink the start/end times relative to the main labels
+                                        size: Math.min(12, d.size * 0.8)
+                                    };
+                                }
+                            }]
                         }
 
                     ]
