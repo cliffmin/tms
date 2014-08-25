@@ -313,7 +313,7 @@ angular.module('tmsApp')
                                 anchor: 'right',
                                 mappings: function(d) {
                                     return {
-                                        text: utc2(d.start1),
+                                        text: d.start1,
                                         x: utc2(d.start1),
                                     };
                                 }
@@ -323,7 +323,7 @@ angular.module('tmsApp')
                                 anchor: 'left',
                                 mappings: function(d) {
                                     return {
-                                        text: utc2(d.end1),
+                                        text: d.end1,
                                         x: utc2(d.end1),
                                     };
                                 }
@@ -333,7 +333,8 @@ angular.module('tmsApp')
                                 mappings: function(d) {
                                     return {
                                         x: utc2(d.start2),
-                                        x2: utc2(d.end2)
+                                        x2: utc2(d.end2),
+                                        text: d.text
                                     };
                                 }
                             },{
@@ -342,7 +343,7 @@ angular.module('tmsApp')
                                 anchor: 'right',
                                 mappings: function(d) {
                                     return {
-                                        text: utc2(d.start2),
+                                        text: d.start2,
                                         x: utc2(d.start2),
                                     };
                                 }
@@ -352,7 +353,7 @@ angular.module('tmsApp')
                                 anchor: 'left',
                                 mappings: function(d) {
                                     return {
-                                        text: utc2(d.end2),
+                                        text: d.end2,
                                         x: utc2(d.end2),
                                     };
                                 }
@@ -407,11 +408,12 @@ angular.module('tmsApp')
             };
         })();
         var utc2 = (function() {
-            var parser = d3.time.format.utc('%Y%j%H%M%S');
+            var parser = d3.time.format.utc('%Y-%jT%H:%M:%S');
             return function(d) {
                 return parser.parse(d);
             };
         })();
+
 
 
 

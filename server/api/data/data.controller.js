@@ -134,11 +134,11 @@ function possiblePassesParser() {
         for (var i = 0; i < csv.length; i += 10) {
             returnArray.push({
                 'text': csv[i],
-                'start1': csv[i + 3],
-                'end1': csv[i + 4],
+                'start1': timeFormatter(csv[i + 3]),
+                'end1': timeFormatter(csv[i + 4]),
                 'orbitNum': csv[6],
-                'start2': csv[i + 8],
-                'end2': csv[i + 9],
+                'start2': timeFormatter(csv[i + 8]),
+                'end2': timeFormatter(csv[i + 9]),
                 'color': function(textString) {
                     switch (textString) {
                         case 'MG1':
@@ -168,3 +168,12 @@ function possiblePassesParser() {
 
 }
 
+function timeFormatter(timeString){
+    var timeArray = timeString.split('');
+    var year = timeArray[0]+timeArray[1]+timeArray[2]+timeArray[3];
+    var day = timeArray[4]+timeArray[5]+timeArray[6];
+    var hour = timeArray[7]+timeArray[8];
+    var minute = timeArray[9]+timeArray[10];
+    var second = timeArray[11] + timeArray[12];
+    return year + '-' + day + 'T' + hour + ':' + minute + ':' + second;
+}

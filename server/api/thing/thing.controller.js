@@ -35,3 +35,16 @@ exports.index = function(req, res) {
   }
   ]);
 };
+function timeFormatter(timeString){
+    var timeArray = timeString.split('');
+    var year = timeArray[0]+timeArray[1]+timeArray[2]+timeArray[3];
+    var day = timeArray[4]+timeArray[5]+timeArray[6];
+    var hour = timeArray[7]+timeArray[8];
+    var minute = timeArray[9]+timeArray[10];
+    var second = timeArray[11] + timeArray[12];
+    return year + '-' + day + 'T' + hour + ':' + minute + ':' + second;
+}
+
+var myString = '2015183052624';
+
+console.log(timeFormatter(myString));
