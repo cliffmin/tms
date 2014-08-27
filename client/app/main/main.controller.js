@@ -61,6 +61,7 @@ angular.module('tmsApp')
                                 adjustments: function(d) {
                                     return {
                                         // Slightly shrink the start/end times relative to the main labels
+                                        y: d.y + (d.y * .4),
                                         size: Math.min(12, d.size * 0.8)
                                     };
                                 }
@@ -122,6 +123,22 @@ angular.module('tmsApp')
                                         text: d.text
                                     }
                                 }
+                            }, {
+                                type: 'label',
+                                anchor: 'left',
+                                mappings: function(d) {
+                                    return {
+                                        x: utc(d.start),
+                                        text: d.start
+                                    }
+                                },
+                                adjustments: function(d) {
+                                    return {
+                                        // Slightly shrink the start/end times relative to the main labels
+                                        y: d.y + (d.y * .4),
+                                        size: Math.min(12, d.size * 0.3)
+                                    };
+                                }
                             }]
                         }, {
                             title: 'Science ORT Week 26 activities',
@@ -155,12 +172,13 @@ angular.module('tmsApp')
                                 mappings: function(d) {
                                     return {
                                         x: utc(d.start),
-                                        text: utc(d.start)
+                                        text: d.start
                                     }
                                 },
                                 adjustments: function(d) {
                                     return {
                                         // Slightly shrink the start/end times relative to the main labels
+                                        y: d.y + (d.y * .4),
                                         size: Math.min(12, d.size * 0.3)
                                     };
                                 }
@@ -170,12 +188,13 @@ angular.module('tmsApp')
                                 mappings: function(d) {
                                     return {
                                         x: utc(d.end),
-                                        text: utc(d.end)
+                                        text: d.end
                                     }
                                 },
                                 adjustments: function(d) {
                                     return {
                                         // Slightly shrink the start/end times relative to the main labels
+                                        y: d.y + (d.y * .4),
                                         size: Math.min(12, d.size * 0.3)
                                     };
                                 }
@@ -213,12 +232,13 @@ angular.module('tmsApp')
                                     mappings: function(d) {
                                         return {
                                             x: utc(d.start),
-                                            text: utc(d.start)
+                                            text: d.start
                                         }
                                     },
                                     adjustments: function(d) {
                                         return {
                                             // Slightly shrink the start/end times relative to the main labels
+                                            y: d.y + (d.y * .4),
                                             size: Math.min(12, d.size * 0.4)
                                         };
                                     },
@@ -228,12 +248,13 @@ angular.module('tmsApp')
                                     mappings: function(d) {
                                         return {
                                             x: utc(d.end),
-                                            text: utc(d.end)
+                                            text: d.end
                                         }
                                     },
                                     adjustments: function(d) {
                                         return {
                                             // Slightly shrink the start/end times relative to the main labels
+                                            y: d.y + (d.y * .4),
                                             size: Math.min(12, d.size * 0.4)
                                         };
                                     },
@@ -273,6 +294,7 @@ angular.module('tmsApp')
                                 adjustments: function(d) {
                                     return {
                                         // Slightly shrink the start/end times relative to the main labels
+                                        y: d.y + (d.y * .5),
                                         size: Math.min(12, d.size * 0.8)
                                     };
                                 }
@@ -304,7 +326,6 @@ angular.module('tmsApp')
                                         x: utc2(d.start1),
                                         x2: utc2(d.end1),
                                         text: d.text,
-                                        fill: d.color
                                     };
                                 }
                             }, {
@@ -315,8 +336,16 @@ angular.module('tmsApp')
                                     return {
                                         text: d.start1,
                                         x: utc2(d.start1),
+                                        fill: d.color
                                     };
-                                }
+                                },
+                                adjustments: function(d) {
+                                    return {
+                                        // Slightly shrink the start/end times relative to the main labels
+                                        y: d.y / 5,
+                                        size: Math.min(12, d.size * 0.8)
+                                    };
+                                },
                             }, {
                                 type: 'label',
                                 fill: 'none',
@@ -325,26 +354,24 @@ angular.module('tmsApp')
                                     return {
                                         text: d.end1,
                                         x: utc2(d.end1),
+                                        fill: d.color
+                                    };
+                                },
+                                adjustments: function(d) {
+                                    return {
+                                        // Slightly shrink the start/end times relative to the main labels
+                                        y: d.y + (d.y * .5),
+                                        size: Math.min(12, d.size * 0.8)
                                     };
                                 }
-                            },{
+                            }, {
                                 type: 'whisker',
                                 fill: 'none',
                                 mappings: function(d) {
                                     return {
                                         x: utc2(d.start2),
                                         x2: utc2(d.end2),
-                                        text: d.text
-                                    };
-                                }
-                            },{
-                                type: 'label',
-                                fill: 'none',
-                                anchor: 'right',
-                                mappings: function(d) {
-                                    return {
-                                        text: d.start2,
-                                        x: utc2(d.start2),
+                                        text: d.text,
                                     };
                                 }
                             }, {
@@ -353,12 +380,35 @@ angular.module('tmsApp')
                                 anchor: 'left',
                                 mappings: function(d) {
                                     return {
+                                        text: d.start2,
+                                        x: utc2(d.start2),
+                                    };
+                                },
+                                adjustments: function(d) {
+                                    return {
+                                        // Slightly shrink the start/end times relative to the main labels
+                                        y: d.y / (5.3),
+                                        size: Math.min(12, d.size * 0.8)
+                                    };
+                                },
+                            }, {
+                                type: 'label',
+                                fill: 'none',
+                                anchor: 'right',
+                                mappings: function(d) {
+                                    return {
                                         text: d.end2,
                                         x: utc2(d.end2),
                                     };
-                                }
-                            }
-                            ]
+                                },
+                                adjustments: function(d) {
+                                    return {
+                                        // Slightly shrink the start/end times relative to the main labels
+                                        y: d.y + (d.y * .5),
+                                        size: Math.min(12, d.size * 0.8)
+                                    };
+                                },
+                            }]
                         }
 
                     ]
